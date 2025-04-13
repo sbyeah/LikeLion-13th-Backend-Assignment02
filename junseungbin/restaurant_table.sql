@@ -3,7 +3,7 @@ USE ｒｅｓｔａｕｒａｎｔ;
 CREATE TABLE customers (
 	id INTEGER PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
-    phone VARCHAR(20)
+    phone_number VARCHAR(20)
 );
 
 CREATE TABLE orders (
@@ -14,3 +14,4 @@ CREATE TABLE orders (
 	FOREIGN KEY (customer_id) REFERENCES customers(id)
 		ON DELETE SET NULL
 );
+
