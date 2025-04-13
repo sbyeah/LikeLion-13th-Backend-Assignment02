@@ -26,12 +26,16 @@ public class ItemService {
 
         itemRepository.save(item);
     }
+    private Item validateItemExists(Long id) {
+        Item item = itemRepository.findById(id);
+        if (item == null) {
+            throw new IllegalArgumentException("해당하는 정보가 없습니다. id = " + id);
+        }
+        return item;
+    }
 
     public ItemDto findItemById(Long id) {
         Item item = itemRepository.findById(id);
-        if (item == null) {
-            throw new IllegalArgumentException("해당하는 물건이 없습니다. id = " + id);
-        }
         return toDto(item);
     }
 
@@ -43,10 +47,6 @@ public class ItemService {
 
     public Item updateItemById(Long id, ItemDto requestDto) {
         Item item = itemRepository.findById(id);
-        if (item == null) {
-            throw new IllegalArgumentException("해당하는 물건이 없습니다. id = " + id);
-        }
-
         item.update(requestDto.menu(), requestDto.num());
         itemRepository.updateById(id, item);
         return item;
